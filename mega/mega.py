@@ -13,6 +13,9 @@ from .crypto import *
 import tempfile
 
 
+TEMP_DIR = os.environ.get('TEMP_DIR')
+
+
 class Mega(object):
     def __init__(self, options=None):
         self.schema = 'https'
@@ -485,7 +488,8 @@ class Mega(object):
         else:
             dest_path += '/'
 
-        temp_output_file = tempfile.NamedTemporaryFile(mode='w+b', prefix='megapy_', delete=False)
+        temp_output_file = tempfile.NamedTemporaryFile(mode='w+b', prefix='megapy_', delete=False,
+                                                       dir=TEMP_DIR)
 
         k_str = a32_to_str(k)
         counter = Counter.new(
